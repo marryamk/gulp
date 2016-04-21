@@ -98,9 +98,14 @@
             var blue = new lib.blue();
             stage.addChild(blue);
 
-            blue.x = stageW * .2;
-            blue.y = stageH * .2;
+            blue.x = stageW * .4;
+            blue.y = stageH * .9;
             blue.setBounds(20,20,80,80);
+
+            createjs.Tween.get(blue, {loop: true})
+                .to({y: stageH / 1.25}, 1500, createjs.Ease.quadIn)
+                .to({y: stageH / 12}, 1500, createjs.Ease.quadIn)
+
 
 
             var blue2 = new lib.blue();
@@ -110,11 +115,6 @@
             blue2.y = stageH * .5;
             blue2.setBounds(20,20,80,80);
 
-            // createjs.Tween.get(blue, {
-            //         loop: true
-            //     })
-            //     .to({y: stageH / 1.25}, 900, createjs.Ease.quadIn)
-            //     .to({y: stageH / 12}, 900, createjs.Ease.quadIn)
 
             //GREEN//
 
