@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Blobby</title>
+
+
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        #myCanvas {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            background-color: #000;
+        }
+    </style>
+
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="js/zim_2.4.js"></script>
+
+
+    <script>
+        window.addEventListener("load", function() {
+            console.log("hello");
+            var stageW;
+            var stageH;
+            var ready = false;
+            var resize;
+            makeCanvas();
+            // put app code here
+            var stage = new createjs.Stage("myCanvas");
+            stage.enableMouseOver(10); // leave out if mobile
+            createjs.Touch.enable(stage, true);
+            sizeStage();
+            console.log(stageW, stageH);
+            // handle asset loading and call main app function when complete
+            //  	var manifest = [{src:"beach.jpg", id:"beach"}]; // array of objects
+            //  	var preload = new createjs.LoadQueue(false); // use true if on the same server
+            //  	preload.on("complete", app);	 // call the main code when ready
+            //  	preload.loadManifest(manifest);
+            app();
+
+            function app() {
+                var board = new createjs.Shape();
+                var g = board.graphics;
+                stage.addChild(board);
+                sizeBoard();
+
+
+
+
+                function sizeBoard() {
+                    g.c(); // or g.clear()
+    
+                    var cols = 3;
+                    var w = stageW / cols;
+                    var gap = stageW * .005;
+                    var colors = ["teal", "white", "lightseagreen"];
+                    for (var i = 0; i < cols; i++) {
+                        g.f(colors[i % colors.length]).dr(i * (w + gap), 0, w, stageH * 1);
+
+
+
+
+
+                    }
+
+                    var c = new zim.Circle(50, "orange");
+                    stage.addChild(c);
+                    zim.centerReg(c,stage)
+
+                    zim.drag(c);
+
+                    stage.update();
+
+
+                }
+
+
+
+                resizePic();
+
+                function resizePic() {
+
+
+                }
+                resize = function() {
+                    // here is where we put code to resize
+                    sizeBoard();
+                    sizePicture();
+                    stage.update();
+                }
+                resize = function() {
+                    // here is where we put code to resize
+                    sizeBoard();
+                    resizePic();
+                    stage.update();
+                }
+                stage.update();
+                ready = true;
+                // end of the app code
+            }
+
+
+            // template
+            function makeCanvas() {
+                // make a canvas tag and apply attributes for id, width and height
+                var canvas = document.createElement("canvas");
+                canvas.setAttribute("id", "myCanvas");
+                // get maximum size for canvas
+                // note: iOS6 does not work from loading icon unless keep canvas within device size
+                // thank you apple for this and many other days of hell
+                largest = Math.max(window.innerWidth, screen.width, window.innerHeight, screen.height);
+                if (!/ip(hone|od|ad)/i.test(navigator.userAgent)) largest *= 3; // handle up to three monitors
+                console.log(largest);
+                canvas.setAttribute("width", largest);
+                canvas.setAttribute("height", largest);
+                // add our canvas tag
+                document.body.appendChild(canvas);
+                // stop the canvas from moving when certain keys are pressed (pgdwn, pgup, arrows, home, end)
+                // and stop scrollwheel from moving page
+                var a = function(e) {
+                    if (!e) e = event;
+                    console.log(e.keyCode);
+                    if (e.keyCode && (e.keyCode >= 32 && e.keyCode <= 40)) e.preventDefault();
+                }
+                var b = function(e) {
+                    if (!e) e = event;
+                    e.preventDefault();
+                }
+                var c = b;
+                window.addEventListener("keydown", a);
+                window.addEventListener("mousewheel", b);
+                window.addEventListener("DOMMouseScroll", c);
+                window.addEventListener('resize', function() {
+                    sizeStage();
+                    if (/android|nexus/i.test(navigator.userAgent)) {
+                        setTimeout(function() {
+                            sizeStage();
+                        }, 500); // to catch delayed screen sizes
+                    }
+                });
+            }
+
+            function sizeStage() {
+                // earlier than IE9 does not have innerWidth
+                // inner is better on mobile when zoomed so can't always use client
+                // ternary operator
+                stageW = isNaN(window.innerWidth) ? window.clientWidth : window.innerWidth;
+                stageH = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
+                console.log(stageW, stageH);
+                if (stage) stage.setBounds(0, 0, stageW, stageH);
+                if (ready) resize();
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script>
+        var zon = true; // true for comments from zim code
+    </script>
+    <script src="js/createjs-2015.11.26.min.js"></script>
+    <!-- add _doc to see code -->
+    <script src="js/zim_2.4.js"></script>
+</body>
+
+</html>
