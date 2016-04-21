@@ -182,6 +182,10 @@
             var red = new lib.red();
             stage.addChild(red);
             red.setBounds(20,20,80,80);
+            red2.x = stageW * .4;
+            red2.y = stageH * .1;
+
+
             // red.scaleX = red.scaleY= .5;
 
 
@@ -191,7 +195,7 @@
             stage.addChild(red2);
             red2.setBounds(20,20,80,80);
 
-            red2.x = stageW * .6;
+            red2.x = stageW * .1;
             red2.y = stageH * .1;
 
             //YELLOW//
@@ -229,13 +233,8 @@
                 // RED HIT TEST //
                 if (zim.hitTestBounds(cursor, red)) {
 
-                    zim.animate(cursor, {
-                        scale: bigger
-                    }, 1200, "elasticOut");
-                    zim.animate(red, {
-                        scale: smaller
-                    }, 1200, "elasticOut");
-
+                    zim.animate(cursor, { scale: bigger }, 1200, "elasticOut");
+                    zim.animate(red, { scale: smaller }, 1200, "elasticOut");
 
                     // setTimeout(function() {
                     stage.removeChild(red);
@@ -406,7 +405,6 @@
 
                 // GREEN HIT TEST //
 
-
                 if (zim.hitTestBounds(cursor, green)) {
 
                     zim.animate(cursor, {
@@ -463,9 +461,17 @@
                 green.x = stageW * .8;
                 green.y = stageH * .5;
 
+                zim.scaleTo(green2, stage, 10);
+                green2.x = stageW * .8;
+                green2.y = stageH * .5;
+
                 zim.scaleTo(purple, stage, 5);
                 purple.x = stageW * .1;
                 purple.y = stageH * .5;
+
+                zim.scaleTo(purple2, stage, 5);
+                purple2.x = stageW * .9;
+                purple2.y = stageH * .5;
 
                 zim.scaleTo(orange, stage, 8);
                 orange.x = stageW * .5;
@@ -516,6 +522,12 @@
 
 <!-- TO DO: -->
 <!-- instructions pane -->
+
+<!-- This is you:
+These are some yummy blobs:
+Gulp the blobs to change your size: -->
+<!-- splash screen -->
+<!-- icon -->
 
 
 <!-- is there a way to do hit tests on everything at once in a function -->
