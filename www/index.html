@@ -120,6 +120,7 @@
 
             function hit() {
 
+                // RED HIT TEST
                 if (zim.hitTestBounds(cursor, red)) {
 
                     //   createjs.Sound.play("swoosh");
@@ -135,12 +136,57 @@
                         stage.removeChild(red);
 
                 //   }, 500);
-
                     red.x = -2000;
+                }
 
 
+
+                //ORANGE HIT TEST //
+
+
+                if (zim.hitTestBounds(cursor, orange)) {
+
+                //   createjs.Sound.play("swoosh");
+
+                    var bigger = cursor.scaleX*1.3;
+                    var smaller = cursor.scaleX*.3;
+
+                    zim.animate(cursor, {scale:bigger}, 1200, "elasticOut");
+                    zim.animate(orange, {scale:smaller}, 1200, "elasticOut");
+
+
+                    // setTimeout(function() {
+                    stage.removeChild(orange);
+
+                //   }, 500);
+
+                    orange.x = -2000;
 
                 }
+
+                // BLUE HIT TEST //
+
+                if (zim.hitTestBounds(cursor, blue)) {
+
+                //   createjs.Sound.play("swoosh");
+
+                    var bigger = cursor.scaleX*1.3;
+                    var smaller = cursor.scaleX*.3;
+
+                    zim.animate(cursor, {scale:bigger}, 1200, "elasticOut");
+                    zim.animate(blue, {scale:smaller}, 1200, "elasticOut");
+
+
+                    // setTimeout(function() {
+                    stage.removeChild(blue);
+
+                //   }, 500);
+
+                    blue.x = -2000;
+
+                }
+
+
 
 
 
@@ -195,8 +241,8 @@
             stage.addChild(orange);
             orange.setBounds(20,20,80,80);
 
-            orange.x = stageW * .5;
-            orange.y = stageH * .8;
+            orange.x = stageW * .1;
+            orange.y = stageH * .1;
 
             //ORANGE2//
 
@@ -205,8 +251,8 @@
             orange2.setBounds(20,20,80,80);
 
 
-            orange2.x = stageW * .1;
-            orange2.y = stageH * .1;
+            orange2.x = stageW * .5;
+            orange2.y = stageH * .9;
 
 
 
@@ -279,9 +325,13 @@
                 purple.x = stageW * .1;
                 purple.y = stageH * .5;
 
-                zim.scaleTo(orange, stage, 5);
+                zim.scaleTo(orange, stage, 8);
                 orange.x = stageW * .5;
                 orange.y = stageH * .1;
+
+                zim.scaleTo(orange2, stage, 8);
+                orange2.x = stageW * .3;
+                orange2.y = stageH * .9;
 
 
                 zim.scaleTo(cursor, stage, 10);
