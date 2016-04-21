@@ -104,7 +104,7 @@
 
             createjs.Tween.get(blue, {loop: true})
                 .to({y: stageH / 1.25}, 1500, createjs.Ease.quadIn)
-                .to({y: stageH / 12}, 1500, createjs.Ease.quadIn)
+                .to({y: stageH / 5}, 1500, createjs.Ease.quadIn)
 
 
 
@@ -465,9 +465,18 @@
                 green2.x = stageW * .8;
                 green2.y = stageH * .5;
 
+
+                zim.scaleTo(blue, stage, 5);
+                blue.x = stageW * .1;
+                blue.y = stageH * .5;
+
+                zim.scaleTo(blue2, stage, 5);
+                blue2.x = stageW * .9;
+                blue2.y = stageH * .9;
+
                 zim.scaleTo(purple, stage, 5);
-                purple.x = stageW * .1;
-                purple.y = stageH * .5;
+                purple.x = stageW * .9;
+                purple.y = stageH * .4;
 
                 zim.scaleTo(purple2, stage, 5);
                 purple2.x = stageW * .9;
@@ -480,6 +489,15 @@
                 zim.scaleTo(orange2, stage, 8);
                 orange2.x = stageW * .3;
                 orange2.y = stageH * .9;
+
+
+                zim.scaleTo(yellow, stage, 8);
+                yellow.x = stageW * .1;
+                yellow.y = stageH * .7;
+
+                zim.scaleTo(oyellow2, stage, 8);
+                yellow2.x = stageW * .5;
+                yellow2.y = stageH * .3;
 
 
                 zim.scaleTo(cursor, stage, 10);
