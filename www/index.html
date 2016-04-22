@@ -103,25 +103,18 @@
             // title.y = 300;
             // zim.centerReg(title);
 
-            //    //INTRO PANE
-            //    var intro = new createjs.Container();
-            //    startPage.addChild(intro);
-            //    intro.x = stageW / 2 - 264;
-            //    intro.y = stageH / 2 - 130;
 
-            //   var startpane = new createjs.Bitmap(preload.getResult("intro"));
-            //   startPage.addChild(startpane);
+            //
+            // var play = new zim.Label("Play", 40, "AmaticSC", "white");
+            //
+            // var pbutton = new zim.Button(200, 75, play, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
+            // startPage.addChild(pbutton);
+            // pbutton.x = stageW/2;
+            // pbutton.y = stageH/2;
+            // pbutton.on("click", start);
+            //
+            // zim.centerReg(startPage, stage);
 
-            //     var play = new zim.Label("Play", 40, "AmaticSC", "white");
-            //
-            //     var pbutton = new zim.Button(200, 75, play, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
-            //     startPage.addChild(pbutton);
-            //     pbutton.x = stageW/2;
-            //     pbutton.y = stageH/2;
-            //     pbutton.on("click", start);
-            //
-            //     zim.centerReg(startPage, stage);
-            //
             // }
 
 
@@ -139,47 +132,38 @@
             //             introTxt.lineHeight = (stageH*0.03)*1.2;
             //             instructions.addChild(introTxt);
 
-            addInstruct();
+            // Working
 
-                        var instructions
-                		//add instructions panel
-                		function addInstruct(){
-                			//add tutorial/help panes to swipe through (intro and in help button/section)
-                			instructions = new createjs.Container();
-                			// stage.addChild(instructions);
-                			var instructBack = new createjs.Shape();
-                			instructions.addChild(instructBack);
-                			var instructTxt = new createjs.Text("Gulp the blobs that make you bigger and stay away from the ones that make you smaller!", stageH*0.03+"px AmaticSC", "white");
-                			// instructTxt.textAlign = "center";
-                			instructTxt.lineHeight = (stageH*0.03)*1.2;
-                			instructions.addChild(instructTxt);
-                                console.log("test");
+            // addInstruct();
+            //
+            //             var instructions
+            //     		//add instructions panel
+            //     		function addInstruct(){
+            //     			//add tutorial/help panes to swipe through (intro and in help button/section)
+            //     			instructions = new createjs.Container();
+            //     			// stage.addChild(instructions);
+            //     			var instructBack = new createjs.Shape();
+            //     			instructions.addChild(instructBack);
+            //     			var instructTxt = new createjs.Text("Gulp the blobs that make you bigger and stay away from the ones that make you smaller!", stageH*0.03+"px AmaticSC", "white");
+            //     			// instructTxt.textAlign = "center";
+            //     			instructTxt.lineHeight = (stageH*0.03)*1.2;
+            //     			instructions.addChild(instructTxt);
+            //                     console.log("test");
 
-                			//add swipe function
-                			// haaf.cjsSwipe(instructions);
-                			// instructions.addEventListener("swipe", function(e){
-                			// 	console.log(e.swipeX, e.swipeY);
-                			// 	if(e.swipeX != -1) return;
-                			// 	ticker = createjs.Ticker.on("tick", stage);
-                			// 	createjs.Tween.get(instructions).to({x:-stageW}, 700, createjs.Ease.backOut);
-                			// 	gamePlay = true;
-                			// });
-                			// sizeInstruct();
-                		}
+            //add swipe function
+            // haaf.cjsSwipe(instructions);
+            // instructions.addEventListener("swipe", function(e){
+            // 	console.log(e.swipeX, e.swipeY);
+            // 	if(e.swipeX != -1) return;
+            // 	ticker = createjs.Ticker.on("tick", stage);
+            // 	createjs.Tween.get(instructions).to({x:-stageW}, 700, createjs.Ease.backOut);
+            // 	gamePlay = true;
+            // });
+            // sizeInstruct();
+            // }
 
 
-                        //add swipe function
-                        // haaf.cjsSwipe(instructions);
-                        // instructions.addEventListener("swipe", function(e){
-                        //     console.log(e.swipeX, e.swipeY);
-                        //     if(e.swipeX != -1) return;
-                        //     ticker = createjs.Ticker.on("tick", stage);
-                        //     createjs.Tween.get(instructions).to({x:-stageW}, 700, createjs.Ease.backOut);
-                        //     gamePlay = true;
-                        // });
-                        // sizeInstruct();
-                    // }
-                    //
+
 
             start();
 
@@ -198,137 +182,8 @@
                 zim.Ticker.always(stage);
                 zim.Ticker.setFPS(30, 30);
 
-                //set up damping
-                var damping = .02;
 
                 // ADD BLOBS TO STAGE//
-
-
-                //BLUE//
-                var blue = new lib.blue();
-                stage.addChild(blue);
-
-                blue.x = stageW * .4;
-                blue.y = stageH * .9;
-                blue.setBounds(20, 20, 80, 80);
-
-                // createjs.Tween.get(blue, {
-                //         loop: true
-                //     })
-                //     .to({
-                //         y: stageH / 1.25
-                //     }, 1500, createjs.Ease.quadIn)
-                //     .to({
-                //         y: stageH / 5
-                //     }, 1500, createjs.Ease.quadIn)
-
-
-
-                var blue2 = new lib.blue();
-                stage.addChild(blue2);
-
-                blue2.x = stageW * .5;
-                blue2.y = stageH * .5;
-                blue2.setBounds(20, 20, 80, 80);
-
-
-                //GREEN//
-
-                var green = new lib.green();
-                stage.addChild(green);
-
-                green.x = stageW * .3;
-                green.y = stageH * .5;
-                green.setBounds(20, 20, 80, 80);
-
-                //GREEN2//
-
-                var green2 = new lib.green();
-                stage.addChild(green2);
-
-                green2.x = stageW * .8;
-                green2.y = stageH * .8;
-                green2.setBounds(20, 20, 80, 80);
-
-
-
-                //PURPLE//
-
-                var purple = new lib.purple();
-                stage.addChild(purple);
-
-                purple.x = stageW * .2;
-                purple.y = stageH * .5;
-                purple.setBounds(20, 20, 80, 80);
-
-                //PURPLE2//
-
-                var purple2 = new lib.purple();
-                stage.addChild(purple2);
-                purple2.setBounds(20, 20, 80, 80);
-
-                purple2.x = stageW * .7;
-                purple2.y = stageH * .5;
-
-
-                //ORANGE//
-
-                var orange = new lib.orange();
-                stage.addChild(orange);
-                orange.setBounds(20, 20, 80, 80);
-
-                orange.x = stageW * .1;
-                orange.y = stageH * .1;
-
-                //ORANGE2//
-
-                var orange2 = new lib.orange();
-                stage.addChild(orange2);
-                orange2.setBounds(20, 20, 80, 80);
-
-
-                orange2.x = stageW * .5;
-                orange2.y = stageH * .9;
-
-
-
-                //RED//
-
-                var red = new lib.red();
-                stage.addChild(red);
-                red.setBounds(20, 20, 80, 80);
-                red.x = stageW * .5;
-                red.y = stageH * .1;
-
-
-                // red.scaleX = red.scaleY= .5;
-
-
-                //RED2//
-
-                var red2 = new lib.red();
-                stage.addChild(red2);
-                red2.setBounds(20, 20, 80, 80);
-
-                red2.x = stageW * .1;
-                red2.y = stageH * .1;
-
-                //YELLOW//
-
-                var yellow = new lib.yellow();
-                stage.addChild(yellow);
-                yellow.setBounds(20, 20, 80, 80);
-
-                yellow.x = stageW * .8;
-                yellow.y = stageH * .2;
-
-                // YELLOW2//
-                var yellow2 = new lib.yellow();
-                stage.addChild(yellow2);
-                yellow2.setBounds(20, 20, 80, 80);
-
-                yellow2.x = stageW * .3;
-                yellow2.y = stageH * .1;
 
                 // CURSOR //
                 var cursor = new zim.Circle(100, "white", "pink", 10);
@@ -339,217 +194,104 @@
                 zim.drag(cursor);
 
 
+                var num = 8;
+                var damping = .02;
+
+                // 3. set up arrays to hold functionality for each object
+                var circles = []; // array for all the circles
+                var bouncers = []; // array of Bouncer objects to represent desired positions of circles
+                var dampingX = []; // arrays to hold the damping objects for the circles (x and y)
+                var dampingY = [];
+                var colors = ["green", "orange", "blue", "purple", "red", "yellow"];
+                // var colors = ["green", "orange", "blue", "purple", "red", "yellow"];
+
+
+                // 4. create an optional container for objects so we can hide, move or scale easily
+                var holder = new createjs.Container();
+                stage.addChild(holder);
+
+                // 5. make a loop to create the objects
+                var circle, bouncer, dampX, dampY; // vars used each time we loop
+                var count = 0;
+                for (var i = 0; i < num; i++) {
+                    var color = colors[count % colors.length];
+                    count++;
+                    var radius = 35;
+                    var stroke = 5;
+
+
+                    circle = new lib[color]();
+                    circle.alive = true;
+                    circle.setBounds(20, 20, 80, 80);
+                    circle.alpha = .8;
+                    holder.addChild(circle);
+                    circles.push(circle);
+
+                    // 6. create a Bouncer for each object to hold calculated desired location
+                    bouncer = new Bouncer(stage, 10, 5);
+                    bouncers.push(bouncer);
+
+                    circle.x = bouncer.x;
+                    circle.y = bouncer.y;
+
+                    // 7. create an x and y Damp for each object to damp towards the desired location
+                    // start the damping off at the random x and y given by the bouncer
+                    dampX = new zim.Damp(bouncer.x, damping);
+                    dampY = new zim.Damp(bouncer.y, damping);
+                    dampingX.push(dampX);
+                    dampingY.push(dampY);
+
+                }
+
+
+                // 8. make a function and add it to the zim.Ticker function list
+                // we assign it to a variable in case we want to remove it from the zim.Ticker function list later
+
+                var move = zim.Ticker.add(
+                    function() {
+                        var circle, bouncer, dampX, dampY;
+
+                        // 9. loop through the objects and position them to the damped value of the advanced bouncer value
+                        for (var i = 0; i < num; i++) {
+                            circle = circles[i];
+                            bouncer = bouncers[i];
+                            dampX = dampingX[i];
+                            dampY = dampingY[i];
+                            bouncer.advance(); // this calculates the next desired location
+                            circle.x = dampX.convert(bouncer.x); // this damps the object towards the desired location
+                            circle.y = dampY.convert(bouncer.y);
+                        }
+                    }
+                );
+
+
+
                 // HIT FUNCTION //
+
                 function hit() {
 
-
-                    var bigger = cursor.scaleX * 1.3;
+                    // var bigger = cursor.scaleX * 1.1;
                     var smaller = cursor.scaleX * .7;
-
-                    // RED HIT TEST //
-                    if (zim.hitTestBounds(cursor, red)) {
-
-                        zim.animate(cursor, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        zim.animate(red, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-
-                        stage.removeChild(red);
-
-                        red.x = -2000;
-                    }
-
-                    if (zim.hitTestBounds(cursor, red2)) {
-
-
-                        zim.animate(cursor, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        zim.animate(red2, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-
-
-                        // setTimeout(function() {
-                        stage.removeChild(red2);
-
-                        //   }, 500);
-                        red2.x = -2000;
-                    }
+                    var esmaller = cursor.scaleX * .3;
 
 
 
-                    //ORANGE HIT TEST //
+                    var circle;
+                    for (var i = 0; i < circles.length; i++) {
 
-                    if (zim.hitTestBounds(cursor, orange)) {
+                        circle = circles[i];
 
-
-                        zim.animate(cursor, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        zim.animate(orange, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-
-
-                        // setTimeout(function() {
-                        stage.removeChild(orange);
-
-                        //   }, 500);
-
-                        orange.x = -2000;
-
-                    }
-
-                    if (zim.hitTestBounds(cursor, orange2)) {
-
-                        zim.animate(cursor, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        zim.animate(orange2, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-
-                        stage.removeChild(orange2);
-
-
-                        orange2.x = -2000;
+                        if (circle.alive && zim.hitTestBounds(cursor, circle)) {
+                            circle.alive = false;
+                            zim.animate(cursor, {scale: esmaller }, 1200, "elasticOut");
+                            zim.animate(circle, {scale: 1.2}, 2000, "elasticOut");
+                        }
 
                     }
 
 
-                    // YELLOW HIT TEST //
+                }
 
-                    if (zim.hitTestBounds(cursor, yellow)) {
-
-                        zim.animate(cursor, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        zim.animate(yellow, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        stage.removeChild(yellow);
-                        yellow.x = -2000;
-                    }
-
-
-
-                    if (zim.hitTestBounds(cursor, yellow2)) {
-
-                        zim.animate(cursor, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        zim.animate(yellow2, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        stage.removeChild(yellow2);
-
-                        yellow2.x = -2000;
-
-                    }
-
-
-
-                    // BLUE HIT TEST //
-
-                    if (zim.hitTestBounds(cursor, blue)) {
-
-                        zim.animate(cursor, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        zim.animate(blue, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        stage.removeChild(blue);
-
-                        blue.x = -2000;
-
-                    }
-
-                    if (zim.hitTestBounds(cursor, blue2)) {
-
-                        zim.animate(cursor, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        zim.animate(blue2, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-                        stage.removeChild(blue2);
-
-
-                        blue2.x = -2000;
-
-                    }
-
-                    //PURPLE HIT TEST//
-
-
-                    if (zim.hitTestBounds(cursor, purple)) {
-
-                        zim.animate(cursor, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        zim.animate(purple, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-
-                        stage.removeChild(purple);
-
-                        purple.x = -2000;
-
-                    }
-
-                    if (zim.hitTestBounds(cursor, purple2)) {
-
-                        zim.animate(cursor, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        zim.animate(purple2, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-
-                        stage.removeChild(purple2);
-
-                        purple2.x = -2000;
-
-                    }
-
-                    // GREEN HIT TEST //
-
-                    if (zim.hitTestBounds(cursor, green)) {
-
-                        zim.animate(cursor, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        zim.animate(green, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-
-                        stage.removeChild(green);
-
-                        green.x = -2000;
-
-                    }
-
-                    if (zim.hitTestBounds(cursor, green2)) {
-
-                        zim.animate(cursor, {
-                            scale: smaller
-                        }, 1200, "elasticOut");
-                        zim.animate(green2, {
-                            scale: bigger
-                        }, 1200, "elasticOut");
-
-                        stage.removeChild(green2);
-
-                        green2.x = -2000;
-
-                    }
-
-
-                };
 
                 zim.Ticker.add(hit);
 
@@ -562,56 +304,56 @@
                     stageH = frame.height;
 
 
-                    zim.scaleTo(red, stage, 12); //percentage
-                    red.x = stageW * .6;
-                    red.y = stageH * .7;
-
-                    zim.scaleTo(red2, stage, 10);
-                    red2.x = stageW * .1;
-                    red2.y = stageH * .6;
-
-                    zim.scaleTo(green, stage, 10);
-                    green.x = stageW * .8;
-                    green.y = stageH * .5;
-
-                    zim.scaleTo(green2, stage, 12);
-                    green2.x = stageW * .8;
-                    green2.y = stageH * .1;
-
-
-                    zim.scaleTo(blue, stage, 10);
-                    blue.x = stageW * .1;
-                    blue.y = stageH * .5;
-
-                    zim.scaleTo(blue2, stage, 10);
-                    blue2.x = stageW * .6;
-                    blue2.y = stageH * .9;
-
-                    zim.scaleTo(purple, stage, 15);
-                    purple.x = stageW * .5;
-                    purple.y = stageH * .8;
-
-                    zim.scaleTo(purple2, stage, 5);
-                    purple2.x = stageW * .9;
-                    purple2.y = stageH * .3;
-
-                    zim.scaleTo(orange, stage, 8);
-                    orange.x = stageW * .5;
-                    orange.y = stageH * .1;
-
-                    zim.scaleTo(orange2, stage, 8);
-                    orange2.x = stageW * .3;
-                    orange2.y = stageH * .9;
-
-                    zim.scaleTo(yellow, stage, 8);
-                    yellow.x = stageW * .1;
-                    yellow.y = stageH * .7;
-
-                    zim.scaleTo(yellow2, stage, 8);
-                    yellow2.x = stageW * .5;
-                    yellow2.y = stageH * .3;
-
-
+                    // zim.scaleTo(red, stage, 12); //percentage
+                    // red.x = stageW * .6;
+                    // red.y = stageH * .7;
+                    //
+                    // zim.scaleTo(red2, stage, 10);
+                    // red2.x = stageW * .1;
+                    // red2.y = stageH * .6;
+                    //
+                    // zim.scaleTo(green, stage, 10);
+                    // green.x = stageW * .8;
+                    // green.y = stageH * .5;
+                    //
+                    // zim.scaleTo(green2, stage, 12);
+                    // green2.x = stageW * .8;
+                    // green2.y = stageH * .1;
+                    //
+                    //
+                    // zim.scaleTo(blue, stage, 10);
+                    // blue.x = stageW * .1;
+                    // blue.y = stageH * .5;
+                    //
+                    // zim.scaleTo(blue2, stage, 10);
+                    // blue2.x = stageW * .6;
+                    // blue2.y = stageH * .9;
+                    //
+                    // zim.scaleTo(purple, stage, 15);
+                    // purple.x = stageW * .5;
+                    // purple.y = stageH * .8;
+                    //
+                    // zim.scaleTo(purple2, stage, 5);
+                    // purple2.x = stageW * .9;
+                    // purple2.y = stageH * .3;
+                    //
+                    // zim.scaleTo(orange, stage, 8);
+                    // orange.x = stageW * .5;
+                    // orange.y = stageH * .1;
+                    //
+                    // zim.scaleTo(orange2, stage, 8);
+                    // orange2.x = stageW * .3;
+                    // orange2.y = stageH * .9;
+                    //
+                    // zim.scaleTo(yellow, stage, 8);
+                    // yellow.x = stageW * .1;
+                    // yellow.y = stageH * .7;
+                    //
+                    // zim.scaleTo(yellow2, stage, 8);
+                    // yellow2.x = stageW * .5;
+                    // yellow2.y = stageH * .3;
+                    //
+                    //
                     zim.scaleTo(cursor, stage, 15);
                     cursor.x = stageW * .4;
                     cursor.y = stageH * .2;
@@ -620,6 +362,56 @@
 
                     stage.update();
                 }); // end of resizing
+
+
+
+                // helper class to position items
+                // note the Bouncer would allow registration points to go right to edge of container bounds
+                // might want to set the bounds to make the objects appear to bounce off the edges
+                // for instance, if the object are circles with their registration points in the middle
+                // container.setBounds(circle.width/2, circle.height/2, container.width-circle.width, container.height-circle.height)
+                // in this example, because we apply the damping the objects never get time to get to the edge
+                // Note: that this code does not actually move the object but rather just keeps track of desired x and y data
+
+                function Bouncer(container, speedMax, speedMin, angleMax, angleMin) {
+
+                    if (zot(container) || !container.getBounds || !container.getBounds()) {
+                        zog("Bouncer(): please provide a object with bounds set as first parameter");
+                        return;
+                    }
+                    if (zot(speedMax)) speedMax = .3;
+                    if (zot(speedMin)) speedMin = .1;
+                    if (zot(angleMax)) angleMax = 360;
+                    if (zot(angleMin)) angleMin = 0;
+                    var that = this;
+                    this.enabled = true;
+                    this.speed = zim.rand(speedMin, speedMax, false);
+                    this.angle = zim.rand(angleMin, angleMax, false);
+                    var b = container.getBounds();
+                    this.x = zim.rand(b.x, b.x + b.width);
+                    this.y = zim.rand(b.y, b.y + b.height);
+
+                    this.advance = function() {
+                        if (!that.enabled) return;
+                        b = container.getBounds();
+                        that.x += that.speed * Math.sin(that.angle * Math.PI / 180); // degrees to radians
+                        that.y += that.speed * Math.cos(that.angle * Math.PI / 180);
+                        if (that.x > b.x + b.width) {
+                            that.x = b.x + b.width;
+                            that.angle = 360 - that.angle;
+                        } else if (that.x < b.x) {
+                            that.x = b.x;
+                            that.angle = 360 - that.angle;
+                        }
+                        if (that.y > b.y + b.height) {
+                            that.y = b.y + b.height;
+                            that.angle = 180 - that.angle;
+                        } else if (that.y < b.y) {
+                            that.y = b.y;
+                            that.angle = 180 - that.angle;
+                        }
+                    }
+                }
 
                 //WIN FUNCTION
                 //     function win () {
@@ -655,6 +447,15 @@
 </body>
 
 </html>
+
+
+<!-- you get smaller and try to eat as many blobs as u can in the time -->
+
+<!-- splashscreen
+
+resize
+
+instructions -->
 
 
 <!-- work on win function
