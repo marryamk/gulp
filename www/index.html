@@ -130,8 +130,17 @@ start();
 
                 // stage.removeChild(startPage);
 
+
+                var blobs = new createjs.Container();
+                stage.addChild(blobs);
+
+
+
                 zim.Ticker.always(stage);
                 zim.Ticker.setFPS(30, 30);
+
+                //set up damping
+                var damping = .02;
 
                 // ADD BLOBS TO STAGE//
 
@@ -553,6 +562,21 @@ start();
                     stage.update();
                 }); // end of resizing
 
+                //WIN FUNCTION
+            //     function win () {
+            //         if (stage.removeChild(orange)){
+            //              alert("You Win!");
+            //         };
+            //         // if (zim.hitTestBounds(cursor, orange2)) {
+            //         //     alert("You Win!");
+            //         // }
+            //         zim.Ticker.add(win);
+            //
+            // };
+
+            stage.update();
+
+
                 // put orientation change code in here
                 frame.on("orientation", function(e) {
                     stage.update();
@@ -574,7 +598,12 @@ start();
 </html>
 
 
-<!-- top bar not showing -->
+<!-- work on win function
+animate function -->
+<!-- user wins when they get all the cool color ones and miss all the warm color ones -->
+
+<!-- get to the biggest that you can -->
+
 <!-- cursor gets stuck in the top -->
 <!-- why is font taking so long to load-->
 
@@ -591,7 +620,6 @@ start();
 <!-- add floating animation -->
 
 <!-- reset thing -->
-
 
 
 <!-- TO DO: -->
