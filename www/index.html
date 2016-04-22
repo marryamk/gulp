@@ -84,32 +84,41 @@
 
             console.log("hi from ready");
 
-            // go();
-            //
-            // function go() {
-            //
-            //
-            //     // START PAGE
-            //
-            //     console.log("go");
-            //     startPage = new createjs.Container();
-            //     stage.addChild(startPage);
-            //
-            // var title = new zim.Label("Escape the blobs", "70", "AmaticSC", "white");            //
-            // startPage.addChild(title);
-            // title.x = stageW/2;
-            // title.y = 300;
-            // zim.centerReg(title);
-            //
-            // var play = new zim.Label("Play", 40, "AmaticSC", "white");
-            //
-            // var pbutton = new zim.Button(200, 75, play, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
-            // startPage.addChild(pbutton);
-            // pbutton.x = stageW/2;
-            // pbutton.y = stageH/2;
-            // pbutton.on("click", start);
-            // zim.centerReg(startPage, stage);
-            // }
+            go();
+
+            function go() {
+
+
+                // START PAGE
+
+                console.log("go");
+                startPage = new createjs.Container();
+                stage.addChild(startPage);
+
+                var backing = new zim.Rectangle(stageW,stageH,"black");
+                startPage.addChild(backing);
+
+                var title = new zim.Label("Get away from the blobs before they get you!", "70", "AmaticSC", "white");            //
+                startPage.addChild(title);
+                title.x = stageW/2;
+                title.y = stageH/4;
+                zim.centerReg(title);
+
+                var play = new zim.Label("Play", 40, "AmaticSC", "white");
+
+                var playButton = new zim.Button(200, 75, play, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
+                startPage.addChild(playButton);
+                playButton.x = stageW/2;
+                playButton.y = stageH/2;
+                zim.centerReg(playButton);
+
+                playButton.label.y-=10;
+                playButton.on("click", start);
+                zim.centerReg(startPage, stage);
+
+                stage.update();
+
+            }
 
 
             //
@@ -131,13 +140,12 @@
 
 
 
-            start();
 
             function start() {
 
 
 
-                // stage.removeChild(startPage);
+                stage.removeChild(startPage);
 
 
                 var blobs = new createjs.Container();
@@ -161,7 +169,7 @@
 
 
                 var num = 8;
-                var damping = .02;
+                var damping = .04;
 
                 // 3. set up arrays to hold functionality for each object
                 var circles = []; // array for all the circles
@@ -268,6 +276,11 @@
                 frame.on("resize", function(e) {
                     stageW = frame.width;
                     stageH = frame.height;
+
+
+
+
+
 
 
                     // zim.scaleTo(red, stage, 12); //percentage
@@ -391,7 +404,6 @@
                 //
                 // };
 
-                stage.update();
 
 
                 // put orientation change code in here
@@ -409,6 +421,10 @@
 </head>
 
 <body>
+
+<div style="font-family: AmaticSC;">
+test
+</div>
 
 </body>
 
@@ -466,8 +482,4 @@ get all the blobs that make u big by a certain time -->
 <!-- splash screen -->
 <!-- icon -->
 
-
-<!-- is there a way to do hit tests on everything at once in a function -->
-
-
-<!-- icon has to be 2048 x 2048 -->
+<!-- avoid all the ones bigger than u -->
