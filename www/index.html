@@ -95,22 +95,22 @@
             //     startPage = new createjs.Container();
             //     stage.addChild(startPage);
 
-                // var title = new zim.Label("Gulp", "70", "AmaticSC", "white");
-                //
-                // // http://www.createjs.com/tutorials/Fonts/ why is this not working
-                // startPage.addChild(title);
-                // title.x = stageW/2;
-                // title.y = 300;
-                // zim.centerReg(title);
+            // var title = new zim.Label("Gulp", "70", "AmaticSC", "white");
+            //
+            // // http://www.createjs.com/tutorials/Fonts/ why is this not working
+            // startPage.addChild(title);
+            // title.x = stageW/2;
+            // title.y = 300;
+            // zim.centerReg(title);
 
-                //    //INTRO PANE
-                //    var intro = new createjs.Container();
-                //    startPage.addChild(intro);
-                //    intro.x = stageW / 2 - 264;
-                //    intro.y = stageH / 2 - 130;
+            //    //INTRO PANE
+            //    var intro = new createjs.Container();
+            //    startPage.addChild(intro);
+            //    intro.x = stageW / 2 - 264;
+            //    intro.y = stageH / 2 - 130;
 
-                //   var startpane = new createjs.Bitmap(preload.getResult("intro"));
-                //   startPage.addChild(startpane);
+            //   var startpane = new createjs.Bitmap(preload.getResult("intro"));
+            //   startPage.addChild(startpane);
 
             //     var play = new zim.Label("Play", 40, "AmaticSC", "white");
             //
@@ -125,8 +125,67 @@
             // }
 
 
-start();
+            //
+            // var intro
+            //         //add instruction box
+            //         function intro(){
+            //             //add tutorial/help panes to swipe through (intro and in help button/section)
+            //             instructions = new createjs.Container();
+            //             stage.addChild(instructions);
+            //             var introBack = new createjs.Shape();
+            //             instructions.addChild(introBack);
+            //             var introTxt = new createjs.Text("Gulp the blobs that make you bigger and stay away from the ones that make you smaller!", stageH*0.03+"px Arial", "white");
+            //             // instructTxt.textAlign = "center";
+            //             introTxt.lineHeight = (stageH*0.03)*1.2;
+            //             instructions.addChild(introTxt);
+
+            addInstruct();
+
+                        var instructions
+                		//add instructions panel
+                		function addInstruct(){
+                			//add tutorial/help panes to swipe through (intro and in help button/section)
+                			instructions = new createjs.Container();
+                			// stage.addChild(instructions);
+                			var instructBack = new createjs.Shape();
+                			instructions.addChild(instructBack);
+                			var instructTxt = new createjs.Text("Gulp the blobs that make you bigger and stay away from the ones that make you smaller!", stageH*0.03+"px AmaticSC", "white");
+                			// instructTxt.textAlign = "center";
+                			instructTxt.lineHeight = (stageH*0.03)*1.2;
+                			instructions.addChild(instructTxt);
+                                console.log("test");
+
+                			//add swipe function
+                			// haaf.cjsSwipe(instructions);
+                			// instructions.addEventListener("swipe", function(e){
+                			// 	console.log(e.swipeX, e.swipeY);
+                			// 	if(e.swipeX != -1) return;
+                			// 	ticker = createjs.Ticker.on("tick", stage);
+                			// 	createjs.Tween.get(instructions).to({x:-stageW}, 700, createjs.Ease.backOut);
+                			// 	gamePlay = true;
+                			// });
+                			// sizeInstruct();
+                		}
+
+
+                        //add swipe function
+                        // haaf.cjsSwipe(instructions);
+                        // instructions.addEventListener("swipe", function(e){
+                        //     console.log(e.swipeX, e.swipeY);
+                        //     if(e.swipeX != -1) return;
+                        //     ticker = createjs.Ticker.on("tick", stage);
+                        //     createjs.Tween.get(instructions).to({x:-stageW}, 700, createjs.Ease.backOut);
+                        //     gamePlay = true;
+                        // });
+                        // sizeInstruct();
+                    // }
+                    //
+
+            start();
+
             function start() {
+
+
 
                 // stage.removeChild(startPage);
 
@@ -153,15 +212,15 @@ start();
                 blue.y = stageH * .9;
                 blue.setBounds(20, 20, 80, 80);
 
-                createjs.Tween.get(blue, {
-                        loop: true
-                    })
-                    .to({
-                        y: stageH / 1.25
-                    }, 1500, createjs.Ease.quadIn)
-                    .to({
-                        y: stageH / 5
-                    }, 1500, createjs.Ease.quadIn)
+                // createjs.Tween.get(blue, {
+                //         loop: true
+                //     })
+                //     .to({
+                //         y: stageH / 1.25
+                //     }, 1500, createjs.Ease.quadIn)
+                //     .to({
+                //         y: stageH / 5
+                //     }, 1500, createjs.Ease.quadIn)
 
 
 
@@ -274,6 +333,7 @@ start();
                 // CURSOR //
                 var cursor = new zim.Circle(100, "white", "pink", 10);
                 stage.addChild(cursor);
+                zim.expand(cursor);
                 zim.centerReg(cursor, stage)
                 cursor.alpha = .5;
                 zim.drag(cursor);
@@ -403,7 +463,6 @@ start();
                             scale: bigger
                         }, 1200, "elasticOut");
                         stage.removeChild(blue);
-
 
                         blue.x = -2000;
 
@@ -563,18 +622,18 @@ start();
                 }); // end of resizing
 
                 //WIN FUNCTION
-            //     function win () {
-            //         if (stage.removeChild(orange)){
-            //              alert("You Win!");
-            //         };
-            //         // if (zim.hitTestBounds(cursor, orange2)) {
-            //         //     alert("You Win!");
-            //         // }
-            //         zim.Ticker.add(win);
-            //
-            // };
+                //     function win () {
+                //         if (stage.removeChild(orange)){
+                //              alert("You Win!");
+                //         };
+                //         // if (zim.hitTestBounds(cursor, orange2)) {
+                //         //     alert("You Win!");
+                //         // }
+                //         zim.Ticker.add(win);
+                //
+                // };
 
-            stage.update();
+                stage.update();
 
 
                 // put orientation change code in here
