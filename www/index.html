@@ -60,9 +60,9 @@
         // "fit"		sets canvas and stage to dimensions and scales to fit inside window size
         // "outside"	sets canvas and stage to dimensions and scales to fit outside window size
         // "full"		sets canvas and stage to window size (canvas is actually set to screen size)
-        var scaling = "full"; // full automatically sets width and height to window size
-        var width = null;
-        var height = null;
+        var scaling = "fit"; // full automatically sets width and height to window size
+        var width = 750;
+        var height = 1334;
         var rollover = !zim.mobile();
         var stage, stageW, stageH;
         var frame = new zim.Frame({
@@ -74,7 +74,6 @@
 
         zim.OPTIMIZE = true;
 
-        //what is rollover
 
         frame.on("ready", function() {
             zog("ready from ZIM Frame");
@@ -98,7 +97,7 @@
                 var backing = new zim.Rectangle(stageW,stageH,"black");
                 startPage.addChild(backing);
 
-                var title = new zim.Label("Get away from the blobs before they get you!", "70", "AmaticSC", "white");            //
+                var title = new zim.Label("Get away from the blobs before they get you!", "60", "AmaticSC", "white");
                 startPage.addChild(title);
                 title.x = stageW/2;
                 title.y = stageH/4;
@@ -119,25 +118,6 @@
                 stage.update();
 
             }
-
-
-            //
-            // var intro
-            //         //add instruction box
-            //         function intro(){
-            //             //add tutorial/help panes to swipe through (intro and in help button/section)
-            //             instructions = new createjs.Container();
-            //             stage.addChild(instructions);
-            //             var introBack = new createjs.Shape();
-            //             instructions.addChild(introBack);
-            //             var introTxt = new createjs.Text("Gulp the blobs that make you bigger and stay away from the ones that make you smaller!", stageH*0.03+"px Arial", "white");
-            //             // instructTxt.textAlign = "center";
-            //             introTxt.lineHeight = (stageH*0.03)*1.2;
-            //             instructions.addChild(introTxt);
-
-            // Working
-
-
 
 
 
@@ -246,7 +226,7 @@
 
                     // var bigger = cursor.scaleX * 1.1;
                     var smaller = cursor.scaleX * .7;
-                    var esmaller = cursor.scaleX * .3;
+                    var esmaller = cursor.scaleX * .5;
 
 
 
