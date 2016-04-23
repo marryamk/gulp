@@ -1,6 +1,5 @@
-
-
 <!doctype html>
+
 <html>
 
 <head>
@@ -74,11 +73,15 @@
         zim.OPTIMIZE = true;
 
 
+
         frame.on("ready", function() {
             zog("ready from ZIM Frame");
             stage = frame.stage;
             stageW = frame.width;
             stageH = frame.height;
+
+            zim.Ticker.always(stage);
+            zim.Ticker.setFPS(30, 30);
 
             console.log("hi from ready");
 
@@ -93,24 +96,32 @@
                 startPage = new createjs.Container();
                 stage.addChild(startPage);
 
-                var backing = new zim.Rectangle(stageW,stageH,"black");
+                var backing = new zim.Rectangle(stageW, stageH, "black");
                 startPage.addChild(backing);
 
-                var title = new zim.Label("Get away from the blobs before they get you!", 60, "AmaticSC", "white");
+
+                var title = new zim.Label({
+                    text: "How long can you last before the blobs get you?",
+                    size: 55,
+                    font: "AmaticSC",
+                    color: "white",
+                    align: "center"
+                });
                 startPage.addChild(title);
-                title.x = stageW/2;
-                title.y = stageH/4;
+                title.x = stageW / 2;
+                title.y = stageH / 4;
                 zim.centerReg(title);
 
-                var play = new zim.Label("TEST", 40, "AmaticSC", "white");
+                var play = new zim.Label("PLAY", 50, "AmaticSC", "white");
 
                 var playButton = new zim.Button(200, 75, play, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
                 startPage.addChild(playButton);
-                playButton.x = stageW/2;
-                playButton.y = stageH/2;
+                playButton.x = stageW / 2;
+                playButton.y = stageH / 2;
                 zim.centerReg(playButton);
 
-                playButton.label.y-=10;
+                playButton.label.x += 30;
+                playButton.label.y += 3;
                 playButton.on("click", start);
                 zim.centerReg(startPage, stage);
 
@@ -132,14 +143,13 @@
 
 
 
-                zim.Ticker.always(stage);
-                zim.Ticker.setFPS(30, 30);
+
 
 
                 // ADD BLOBS TO STAGE//
 
                 // CURSOR //
-                var cursor = new zim.Circle(100, "white", "pink", 10);
+                var cursor = new zim.Circle(50, "white", "pink", 10);
                 stage.addChild(cursor);
                 zim.expand(cursor);
                 zim.centerReg(cursor, stage)
@@ -156,7 +166,6 @@
                 var dampingX = []; // arrays to hold the damping objects for the circles (x and y)
                 var dampingY = [];
                 var colors = ["green", "orange", "blue", "purple", "red", "yellow"];
-                // var colors = ["green", "orange", "blue", "purple", "red", "yellow"];
 
 
                 // 4. create an optional container for objects so we can hide, move or scale easily
@@ -172,10 +181,12 @@
                     var radius = 35;
                     var stroke = 5;
 
+                    var scale = 1.5;
 
                     circle = new lib[color]();
                     circle.alive = true;
-                    circle.setBounds(20, 20, 80, 80);
+                    circle.setBounds(20 * scale, 20 * scale, 80 * scale, 80 * 1.5);
+                    zim.scale(circle, 1.5);
                     circle.alpha = .8;
                     holder.addChild(circle);
                     circles.push(circle);
@@ -219,14 +230,33 @@
 
 
 
+                // SCORE //
+                var score = new zim.Label({
+                    text: 0,
+                    size: 80,
+                    font: "AmaticSC",
+                    color: "white"
+                });
+                stage.addChild(score);
+                score.x = stageW / 2;
+                score.y = stageH / 10;
+
+
+                // TIMER //
+                var timer = setInterval(function() {
+
+                    score.text++;
+
+                }, 1000);
+
+                stage.update();
+
+
                 // HIT FUNCTION //
 
                 function hit() {
 
-                    // var bigger = cursor.scaleX * 1.1;
-                    var smaller = cursor.scaleX * .7;
-                    var esmaller = cursor.scaleX * .5;
-
+                    var bigger = cursor.scaleX * 1.3;
 
 
                     var circle;
@@ -236,8 +266,13 @@
 
                         if (circle.alive && zim.hitTestBounds(cursor, circle)) {
                             circle.alive = false;
-                            zim.animate(cursor, {scale: esmaller }, 1200, "elasticOut");
-                            zim.animate(circle, {scale: 1.2}, 2000, "elasticOut");
+                            zim.animate(cursor, {
+                                scale: bigger
+                            }, 1200, "elasticOut");
+                            zim.animate(circle, {scale: cursor.scaleX * 1.1}, 2000, "elasticOut");
+                            if (cursor.scaleX >= 1.6) {
+                                end();
+                            }
                         }
 
                     }
@@ -247,6 +282,88 @@
 
 
                 zim.Ticker.add(hit);
+
+
+                var title = new zim.Label({
+                    text: "Get away from the blobs before they get you!",
+                    size: 60,
+                    font: "AmaticSC",
+                    color: "white",
+                    align: "center"
+                });
+
+                var backing = new zim.Rectangle(stageW, stageH, "black");
+
+
+                //END //
+
+
+                function end() {
+
+                    stage.removeAllChildren();
+
+                    stage.addChild(endPage)
+
+                    stage.update();
+                }
+
+
+                endPage = new createjs.Container();
+
+                var endBack = new zim.Rectangle(stageW,stageH,"white");
+                endPage.addChild(endBack);
+
+                //
+                //
+                //   var endScore = new zim.Label({text:"Score:" score.text, size:60, font:"AmaticSC", color:"black", align:"center"});
+                //     endPage.addChild(endScore);
+                    // againBtn.on("click", restart);
+                    stage.update();
+                //
+
+
+
+                // function restart() {
+                // 	stage.removeChild(endPage);
+                // 	stage.update();
+                // };
+
+
+
+                //
+                // var playAgain = new zim.Label("PLAY AGAIN", 50, "AmaticSC", "white");
+                //
+                // var againBtn = new zim.Button(200, 75, playAgain, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
+                // endPage.addChild(againBtn);
+                // againBtn.x = stageW/2;
+                // againBtn.y = stageH/2;
+                // zim.centerReg(playButton);
+                //
+                // againBtn.label.x+=30;
+                // againBtn.label.y+=3;
+                // againBtn.on("click", restart);
+                //
+                // stage.update();
+
+
+
+
+
+
+
+
+
+                //
+                // var end; // either holds a green shape for win or a black shape for lose
+                // function makeEnd() {
+                // 	end = new zim.Label({text:"Score:" score.text, size:60, font:"AmaticSC", color:"white", align:"center"});
+                // 	stage.addChild(end);
+                // 	// end.on("click", restart);
+                // 	stage.update();
+                // }
+
+
+
 
 
                 // RESIZING //
@@ -315,18 +432,6 @@
                     }
                 }
 
-                //WIN FUNCTION
-                //     function win () {
-                //         if (stage.removeChild(orange)){
-                //              alert("You Win!");
-                //         };
-                //         // if (zim.hitTestBounds(cursor, orange2)) {
-                //         //     alert("You Win!");
-                //         // }
-                //         zim.Ticker.add(win);
-                //
-                // };
-
 
 
                 // put orientation change code in here
@@ -345,12 +450,16 @@
 
 <body>
 
-<div style="font-family: AmaticSC;">
-</div>
+    <div style="font-family: AmaticSC;">
+    </div>
 
 </body>
 
 </html>
+
+
+
+<!-- score of how long u lasted, win reset function
 
 
 <!-- you get smaller and try to eat as many blobs as u can in the time -->
