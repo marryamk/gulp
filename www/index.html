@@ -15,8 +15,6 @@
     <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
 
 
-    <!-- <script type="text/javascript" src="cordova.js"></script> -->
-
     <script>
         var zon = true; // true for comments from zim code
     </script>
@@ -87,6 +85,12 @@
 
             go();
 
+
+            //PLAY AGAIN
+            function restart() {
+              location.reload();
+            }
+
             function go() {
 
 
@@ -100,24 +104,57 @@
                 startPage.addChild(backing);
 
 
+                // name
+
                 var title = new zim.Label({
-                    text: "How long can you last before the blobs get you?",
-                    size: 55,
+                    text: "GULP",
+                    size: 300,
                     font: "AmaticSC",
                     color: "white",
                     align: "center"
                 });
-                startPage.addChild(title);
+
+                startPage.addChild(title)
                 title.x = stageW / 2;
                 title.y = stageH / 4;
                 zim.centerReg(title);
 
+                // instructions/gameplay
+
+                var instruct = new zim.Label({
+                    text: "Dodge the blobs for as long as you can.",
+                    size: 65,
+                    font: "AmaticSC",
+                    color: "white",
+                    align: "center"
+                });
+
+                startPage.addChild(instruct);
+                instruct.x = stageW / 2;
+                instruct.y = stageH / 2.2;
+                zim.centerReg(instruct);
+
+                var instruct2 = new zim.Label({
+                    text: "You have two lives.",
+                    size: 65,
+                    font: "AmaticSC",
+                    color: "white",
+                    align: "center"
+                });
+
+                startPage.addChild(instruct2);
+                instruct2.x = stageW / 2;
+                instruct2.y = stageH / 2;
+                zim.centerReg(instruct2);
+
+                //PLAY BUTTON
+
                 var play = new zim.Label("PLAY", 50, "AmaticSC", "white");
 
-                var playButton = new zim.Button(200, 75, play, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
+                var playButton = new zim.Button(200, 75, play, "#a852ff", "#d452ff", "white", 4, 3, null, null, 0.5);
                 startPage.addChild(playButton);
                 playButton.x = stageW / 2;
-                playButton.y = stageH / 2;
+                playButton.y = stageH / 1.5;
                 zim.centerReg(playButton);
 
                 playButton.label.x += 30;
@@ -138,15 +175,8 @@
                 stage.removeChild(startPage);
 
 
-                var blobs = new createjs.Container();
-                stage.addChild(blobs);
 
 
-
-
-
-
-                // ADD BLOBS TO STAGE//
 
                 // CURSOR //
                 var cursor = new zim.Circle(50, "white", "pink", 10);
@@ -156,12 +186,12 @@
                 cursor.alpha = .5;
                 zim.drag(cursor);
 
-
+                //BLOBS//
                 var num = 8;
                 var damping = .04;
 
                 // 3. set up arrays to hold functionality for each object
-                var circles = []; // array for all the circles
+                var blobs = []; // array for all the blobs
                 var bouncers = []; // array of Bouncer objects to represent desired positions of circles
                 var dampingX = []; // arrays to hold the damping objects for the circles (x and y)
                 var dampingY = [];
@@ -172,8 +202,10 @@
                 var holder = new createjs.Container();
                 stage.addChild(holder);
 
+                // MAKE/ADD BLOBS TO STAGE//
+
                 // 5. make a loop to create the objects
-                var circle, bouncer, dampX, dampY; // vars used each time we loop
+                var blob, bouncer, dampX, dampY; // vars used each time we loop
                 var count = 0;
                 for (var i = 0; i < num; i++) {
                     var color = colors[count % colors.length];
@@ -183,20 +215,20 @@
 
                     var scale = 1.5;
 
-                    circle = new lib[color]();
-                    circle.alive = true;
-                    circle.setBounds(20 * scale, 20 * scale, 80 * scale, 80 * 1.5);
-                    zim.scale(circle, 1.5);
-                    circle.alpha = .8;
-                    holder.addChild(circle);
-                    circles.push(circle);
+                    blob = new lib[color]();
+                    blob.alive = true;
+                    blob.setBounds(20 * scale, 20 * scale, 80 * scale, 80 * 1.5);
+                    zim.scale(blob, 1.5);
+                    blob.alpha = .8;
+                    holder.addChild(blob);
+                    blobs.push(blob);
 
                     // 6. create a Bouncer for each object to hold calculated desired location
                     bouncer = new Bouncer(stage, 10, 5);
                     bouncers.push(bouncer);
 
-                    circle.x = bouncer.x;
-                    circle.y = bouncer.y;
+                    blob.x = bouncer.x;
+                    blob.y = bouncer.y;
 
                     // 7. create an x and y Damp for each object to damp towards the desired location
                     // start the damping off at the random x and y given by the bouncer
@@ -213,27 +245,39 @@
 
                 var move = zim.Ticker.add(
                     function() {
-                        var circle, bouncer, dampX, dampY;
+                        var blob, bouncer, dampX, dampY;
 
                         // 9. loop through the objects and position them to the damped value of the advanced bouncer value
                         for (var i = 0; i < num; i++) {
-                            circle = circles[i];
+                            blob = blobs[i];
                             bouncer = bouncers[i];
                             dampX = dampingX[i];
                             dampY = dampingY[i];
                             bouncer.advance(); // this calculates the next desired location
-                            circle.x = dampX.convert(bouncer.x); // this damps the object towards the desired location
-                            circle.y = dampY.convert(bouncer.y);
+                            blob.x = dampX.convert(bouncer.x); // this damps the object towards the desired location
+                            blob.y = dampY.convert(bouncer.y);
                         }
                     }
                 );
 
+                //TIMER//
+                // var timeScore;
+                var timer = setInterval(function() {
+
+                    // timeScore++;
+                    // score.text = timeScore;
+
+                    score.text++;
 
 
-                // SCORE //
+                }, 1000);
+
+
+
+                // SCORE DISPLAY //
                 var score = new zim.Label({
                     text: 0,
-                    size: 80,
+                    size: 100,
                     font: "AmaticSC",
                     color: "white"
                 });
@@ -242,14 +286,6 @@
                 score.y = stageH / 10;
 
 
-                // TIMER //
-                var timer = setInterval(function() {
-
-                    score.text++;
-
-                }, 1000);
-
-                stage.update();
 
 
                 // HIT FUNCTION //
@@ -259,24 +295,23 @@
                     var bigger = cursor.scaleX * 1.3;
 
 
-                    var circle;
-                    for (var i = 0; i < circles.length; i++) {
+                    var blob;
+                    for (var i = 0; i < blobs.length; i++) {
 
-                        circle = circles[i];
+                        blob = blobs[i];
 
-                        if (circle.alive && zim.hitTestBounds(cursor, circle)) {
-                            circle.alive = false;
+                        if (blob.alive && zim.hitTestBounds(cursor, blob)) {
+                            blob.alive = false;
                             zim.animate(cursor, {
                                 scale: bigger
                             }, 1200, "elasticOut");
-                            zim.animate(circle, {scale: cursor.scaleX * 1.1}, 2000, "elasticOut");
+                            zim.animate(blob, {scale: cursor.scaleX * 1.1}, 2000, "elasticOut");
                             if (cursor.scaleX >= 1.6) {
                                 end();
                             }
                         }
 
                     }
-
 
                 }
 
@@ -310,59 +345,30 @@
 
                 endPage = new createjs.Container();
 
-                var endBack = new zim.Rectangle(stageW,stageH,"white");
+                var endBack = new zim.Rectangle(stageW,stageH,"black");
                 endPage.addChild(endBack);
 
+
+                var endScore = new zim.Label({text:"Score:", size:60, font:"AmaticSC", color:"white", align:"center"});
+                endScore.x = stageW/2;
+                endScore.y = stageW/2;
+
+                endPage.addChild(endScore);
+
+                //WAS NOT ABLE TO FIGURE OUT HOW TO GET THE TIME TO DISPLAY(adding score.text to the page did not work), I GUESS WE HAVE TO MAKE THE TIMER STOP INCREMENTING AND THEN SOME HOW GET IT TO SHOW ON THE PAGE
+
+
+                var playAgain = new zim.Label({text:"PLAY AGAIN", size:50, font:"AmaticSC", color:"white"});
                 //
-                //
-                //   var endScore = new zim.Label({text:"Score:" score.text, size:60, font:"AmaticSC", color:"black", align:"center"});
-                //     endPage.addChild(endScore);
-                    // againBtn.on("click", restart);
+                var againBtn = new zim.Button(300, 75, playAgain, "#ff7d52", "#ff5050", "white", 4, 3, null, null, 0.5);
+                endPage.addChild(againBtn);
+                againBtn.x = stageW/2;
+                againBtn.y = stageH/2;
+                zim.centerReg(againBtn);
+                againBtn.label.y+=-12;
+                againBtn.on("click", restart);
+
                     stage.update();
-                //
-
-
-
-                // function restart() {
-                // 	stage.removeChild(endPage);
-                // 	stage.update();
-                // };
-
-
-
-                //
-                // var playAgain = new zim.Label("PLAY AGAIN", 50, "AmaticSC", "white");
-                //
-                // var againBtn = new zim.Button(200, 75, playAgain, "#f99e1e", "#f7ca18", "white", 4, 3, null, null, 0.5);
-                // endPage.addChild(againBtn);
-                // againBtn.x = stageW/2;
-                // againBtn.y = stageH/2;
-                // zim.centerReg(playButton);
-                //
-                // againBtn.label.x+=30;
-                // againBtn.label.y+=3;
-                // againBtn.on("click", restart);
-                //
-                // stage.update();
-
-
-
-
-
-
-
-
-
-                //
-                // var end; // either holds a green shape for win or a black shape for lose
-                // function makeEnd() {
-                // 	end = new zim.Label({text:"Score:" score.text, size:60, font:"AmaticSC", color:"white", align:"center"});
-                // 	stage.addChild(end);
-                // 	// end.on("click", restart);
-                // 	stage.update();
-                // }
-
-
 
 
 
@@ -456,61 +462,3 @@
 </body>
 
 </html>
-
-
-
-<!-- score of how long u lasted, win reset function
-
-
-<!-- you get smaller and try to eat as many blobs as u can in the time -->
-
-<!-- splashscreen
-
-resize
-
-instructions -->
-
-
-<!-- work on win function
-animate function -->
-<!-- user wins when they get all the cool color ones and miss all the warm color ones -->
-
-<!-- get to the biggest that you can -->
-
-<!-- cursor gets stuck in the top -->
-<!-- why is font taking so long to load-->
-
-
-
-
-
-
-
-<!-- set different runtime/lengths for the animations -->
-
-<!-- hit area if the blob is moving -->
-
-<!-- add floating animation -->
-
-<!-- reset thing -->
-
-
-<!-- TO DO: -->
-<!-- instructions pane -->
-
-<!-- This is you:
-
-
-These are some yummy blobs:
-Gulp the blobs to change your size: -->
-<!-- Figure out which blobs make you bigger and which ones make you smaller to match the size of the circle in the middle(static circle)
-
-get to a certain size by a certain time (timer runs out)
-
-get all the blobs that make u big by a certain time -->
-
-
-<!-- splash screen -->
-<!-- icon -->
-
-<!-- avoid all the ones bigger than u -->
