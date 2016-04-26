@@ -349,21 +349,31 @@
                 endPage.addChild(endBack);
 
 
-                var endScore = new zim.Label({text:"Score:", size:60, font:"AmaticSC", color:"white", align:"center"});
-                endScore.x = stageW/2;
-                endScore.y = stageW/2;
+
+                var gulped = new zim.Label({text:"You were gulped!", size:80, font:"AmaticSC", color:"white", align:"center"});
+                gulped.x = stageW/2;
+                gulped.y = stageH/4;
+
+                endPage.addChild(gulped);
+
+
+
+                //FINAL SCORE
+                var endScore = new zim.Label({text:"Score:", size:65, font:"AmaticSC", color:"white", align:"center"});
+                endScore.x = stageW/2.5;
+                endScore.y = stageH/2.5;
 
                 endPage.addChild(endScore);
 
                 //WAS NOT ABLE TO FIGURE OUT HOW TO GET THE TIME TO DISPLAY(adding score.text to the page did not work), I GUESS WE HAVE TO MAKE THE TIMER STOP INCREMENTING AND THEN SOME HOW GET IT TO SHOW ON THE PAGE
 
 
-                var playAgain = new zim.Label({text:"PLAY AGAIN", size:50, font:"AmaticSC", color:"white"});
+                var playAgain = new zim.Label({text:"PLAY AGAIN", size:55, font:"AmaticSC", color:"white"});
                 //
                 var againBtn = new zim.Button(300, 75, playAgain, "#ff7d52", "#ff5050", "white", 4, 3, null, null, 0.5);
                 endPage.addChild(againBtn);
                 againBtn.x = stageW/2;
-                againBtn.y = stageH/2;
+                againBtn.y = stageH/1.8;
                 zim.centerReg(againBtn);
                 againBtn.label.y+=-12;
                 againBtn.on("click", restart);
