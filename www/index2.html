@@ -83,11 +83,6 @@
 
             console.log("hi from ready");
 
-            // blob registration is top left so make bounds let blobs go more on the top left
-            // then blobs go right to the corners
-            var boundary = new zim.Rectangle(stageW+200, stageH+200);
-            boundary.setBounds(-200, -200, boundary.width, boundary.height);
-
             go();
 
 
@@ -168,6 +163,7 @@
                 zim.centerReg(startPage, stage);
 
                 stage.update();
+
             }
 
 
@@ -179,6 +175,9 @@
                 stage.removeChild(startPage);
 
 
+
+
+
                 // CURSOR //
                 var cursor = new zim.Circle(50, "white", "pink", 10);
                 stage.addChild(cursor);
@@ -188,7 +187,7 @@
                 zim.drag(cursor);
 
                 //BLOBS//
-                var num = 12;
+                var num = 10;
                 var damping = .04;
 
                 // 3. set up arrays to hold functionality for each object
@@ -218,15 +217,14 @@
 
                     blob = new lib[color]();
                     blob.alive = true;
-                    blob.setBounds(25 * scale, 25 * scale, 40 * scale, 40 * scale);
-                    zim.scale(blob, scale);
+                    blob.setBounds(20 * scale, 20 * scale, 80 * scale, 80 * 1.5);
+                    zim.scale(blob, 1.5);
                     blob.alpha = .8;
                     holder.addChild(blob);
                     blobs.push(blob);
 
-
                     // 6. create a Bouncer for each object to hold calculated desired location
-                    bouncer = new Bouncer(boundary, 12, 4);
+                    bouncer = new Bouncer(stage, 10, 5);
                     bouncers.push(bouncer);
 
                     blob.x = bouncer.x;
@@ -239,15 +237,11 @@
                     dampingX.push(dampX);
                     dampingY.push(dampY);
 
-                    // zim.outline(blob);
-
                 }
 
 
                 // 8. make a function and add it to the zim.Ticker function list
                 // we assign it to a variable in case we want to remove it from the zim.Ticker function list later
-
-
 
                 var move = zim.Ticker.add(
                     function() {
@@ -266,15 +260,16 @@
                     }
                 );
 
-
-
-
                 //TIMER//
                 // var timeScore;
                 var timer = setInterval(function() {
+
                     // timeScore++;
                     // score.text = timeScore;
+
                     score.text++;
+
+
                 }, 1000);
 
 
@@ -307,14 +302,13 @@
 
                         if (blob.alive && zim.hitTestBounds(cursor, blob)) {
                             blob.alive = false;
-                            zim.animate(cursor, {scale: bigger}, 500, "elasticOut");
-
-                            if (cursor.scaleX >= 1.5) {
+                            zim.animate(cursor, {
+                                scale: bigger
+                            }, 1200, "elasticOut");
+                            zim.animate(blob, {scale: cursor.scaleX * 1.1}, 2000, "elasticOut");
+                            if (cursor.scaleX >= 1.6) {
                                 end();
                             }
-
-                            // wait for animation to end before ending gameplay
-                            zim.animate(blob, {scale: cursor.scaleX * 1.1}, 1000, "elasticOut");
                         }
 
                     }
@@ -322,11 +316,7 @@
                 }
 
 
-                // wait two seconds to let them move
-                setTimeout(function(){
-                    zim.Ticker.add(hit);
-                }, 2000);
-
+                zim.Ticker.add(hit);
 
 
                 var title = new zim.Label({
@@ -347,13 +337,7 @@
 
                     stage.removeAllChildren();
 
-                    stage.addChild(endPage);
-
-
-                    endScore.text = "Score: " + score.text;
-                    clearInterval(timer); // otherwise keeps going up
-                    zim.Ticker.remove(move); // don't leave Ticker functions around
-                    zim.Ticker.remove(hit);
+                    stage.addChild(endPage)
 
                     stage.update();
                 }
@@ -376,10 +360,13 @@
 
                 //FINAL SCORE
                 var endScore = new zim.Label({text:"Score:", size:65, font:"AmaticSC", color:"white", align:"center"});
-                endScore.x = stageW/2;
+                endScore.x = stageW/2.5;
                 endScore.y = stageH/2.5;
 
                 endPage.addChild(endScore);
+
+                //WAS NOT ABLE TO FIGURE OUT HOW TO GET THE TIME TO DISPLAY(adding score.text to the page did not work), I GUESS WE HAVE TO MAKE THE TIMER STOP INCREMENTING AND THEN SOME HOW GET IT TO SHOW ON THE PAGE
+
 
                 var playAgain = new zim.Label({text:"PLAY AGAIN", size:55, font:"AmaticSC", color:"white"});
                 //
